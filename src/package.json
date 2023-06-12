@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "nunjucks": "^3.2.4",
+    "wol": "^1.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e js,html,njk,css ./index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
