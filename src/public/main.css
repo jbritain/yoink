@@ -1,0 +1,49 @@
+:root {
+    --bg-color: rgb(43, 45, 66);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
+}
+
+#yoinkButton {
+    font-size: 5em;
+    font-weight: bold;
+
+
+    padding: 32px;
+    background: #0900a7;
+    background: linear-gradient(45deg, #0900a7 0%, #9e00f5 100%);
+    border-radius: 16px;
+    border: 4px solid #807dc9;
+    cursor: pointer;
+    color: white;
+    transition: scale 0.5s;
+}
+
+#yoinkButton:hover {
+    scale: 1.5
+}
+
+#yoinkButton:active {
+    scale: 0.8
+}
+
+#yoinkButton:disabled {
+    scale: 0.8;
+    background: rgb(86,81,158);
+    background: linear-gradient(45deg, rgb(70, 68, 99) 0%, rgb(97, 94, 94)00%);
+    border-color: #65656d;
+    color: rgb(167, 167, 167);
+}
+
+#indicator {
+    width: 16px;
+    height: 16px;
+    background-color: orange;
+    display: inline-block;
+    margin-right: 0.5em;
+    border-radius: 50%;
+}

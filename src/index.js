@@ -8,9 +8,11 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 const MAC = process.env.MAC;
 const IP = process.env.IP;
+const TARGET = process.env.TARGET;
 
 assert(MAC);
 assert(IP);
+assert(TARGET);
 
 var app = express();
 app.use(express.static("public"));
@@ -21,7 +23,9 @@ var env = nunjucks.configure("views", {
 
 app.get("/", (req, res) => {
     try {
-        res.render("index.njk")
+        res.render("index.njk", {
+            target: TARGET
+        })
     } catch(e) {
         console.error(e);
     }
@@ -39,8 +43,7 @@ app.post("/yoink", (req, res) => {
 
 app.get("/status", (req, res) => {
     ping.sys.probe(IP, isAlive => {
-        let msg = isAlive ? "online" : "offline";
-        res.status(200).send(msg);
+        res.status(200).send(isAlive);
     })
 })
 

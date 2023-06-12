@@ -1,8 +1,9 @@
 const statusDisplay = document.getElementById("status");
 const button = document.getElementById("yoinkButton");
-let serverStatus = "unknown";
+const indicator = document.getElementById("indicator");
+let serverStatus = "Waiting for response...";
 let awaitingOnline = false;
-const onlineTimeout = 10000; // time in ms to wait before deciding wol ping didn't work
+const onlineTimeout = 20000; // time in ms to wait before deciding wol ping didn't work
 
 var wakeFailed;
 
@@ -13,7 +14,8 @@ function yoink(){
     .then(res => {
         if(res.status === 200){
             awaitingOnline = true;
-            statusDisplay.innerText = "Waiting for server to start..."
+            statusDisplay.innerText = "Waiting for response...";
+            indicator.style.backgroundColor = "orange";
             wakeFailed = setTimeout(() => {
                 awaitingOnline = false;
                 getStatus();
@@ -27,22 +29,25 @@ function getStatus(){
         method: 'GET'
     })
     .then(res => res.text())
-    .then(status => {
+    .then(online => {
 
-        if (awaitingOnline && serverStatus == "online"){
+        if (awaitingOnline && serverOnline){
             clearTimeout(wakeFailed);
             awaitingOnline = false;
         }
 
+        serverOnline = (online == "true");
+
         if (!awaitingOnline){
-            statusDisplay.innerText = status;
+            statusDisplay.innerText = serverOnline ? "Online" : "Offline";
+            indicator.style.backgroundColor = serverOnline ? "lawngreen" : "red";
+            
         }
 
-        serverStatus = status;
 
-        button.disabled = (status === "online" || awaitingOnline);
+        button.disabled = (serverOnline || awaitingOnline);
     });
 }
 
 getStatus();
-setInterval(getStatus, 1000)
+setInterval(getStatus, 1000);
