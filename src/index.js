@@ -8,11 +8,11 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 const MAC = process.env.MAC;
 const IP = process.env.IP;
-const TARGET = process.env.TARGET;
+const NAME = process.env.NAME;
 
 assert(MAC);
 assert(IP);
-assert(TARGET);
+assert(NAME);
 
 var app = express();
 app.use(express.static("public"));
@@ -24,7 +24,7 @@ var env = nunjucks.configure("views", {
 app.get("/", (req, res) => {
     try {
         res.render("index.njk", {
-            target: TARGET
+            name: NAME
         })
     } catch(e) {
         console.error(e);

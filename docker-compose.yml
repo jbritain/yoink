@@ -1,0 +1,10 @@
+services:
+  yoink:
+    build: ./src
+    container_name: yoink
+    ports:
+      - "8080:8080" # port 8080 is used by the app by default, you can change this, though you may as well just change the one Docker exposes
+    environment:
+      - NAME=YOUR_SERVER_NAME # appears at the top of the webpage
+      - MAC=00:11:22:33:44:55 # the target's MAC address
+      - IP=192.168.1.123 # the target's IP address
