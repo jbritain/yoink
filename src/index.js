@@ -4,6 +4,12 @@ const wol = require('wol');
 const assert = require("assert");
 const ping = require('ping');
 
+const messages = require("./messages.json");
+
+function select(arr){
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
 require('dotenv').config();
 const PORT = process.env.PORT || 8080;
 const MAC = process.env.MAC;
@@ -22,9 +28,11 @@ var env = nunjucks.configure("views", {
 });
 
 app.get("/", (req, res) => {
+    const message = select(messages.messages);
     try {
         res.render("index.njk", {
-            name: NAME
+            name: NAME,
+            message: message
         })
     } catch(e) {
         console.error(e);

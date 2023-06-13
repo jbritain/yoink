@@ -2,16 +2,22 @@
     --bg-color: rgb(43, 45, 66);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--bg-color);
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
+    max-width: 100vw;
+    overflow:hidden;
 }
 
 #yoinkButton {
     font-size: 5em;
     font-weight: bold;
-
+    max-height: 50%;
 
     padding: 32px;
     background: #0900a7;
@@ -20,11 +26,13 @@ body {
     border: 4px solid #807dc9;
     cursor: pointer;
     color: white;
-    transition: scale 0.5s;
+    transition: scale 0.5s, background 0.5s;
 }
 
 #yoinkButton:hover {
-    scale: 1.2
+    scale: 1.2;
+    background: #261fb4;
+    background: linear-gradient(45deg, #261fb4 0%, #a855d4 100%);
 }
 
 #yoinkButton:active {
@@ -32,11 +40,12 @@ body {
 }
 
 #yoinkButton:disabled {
-    scale: 0.8;
+    scale: 0;
     background: rgb(86,81,158);
     background: linear-gradient(45deg, rgb(70, 68, 99) 0%, rgb(97, 94, 94)00%);
     border-color: #65656d;
     color: rgb(167, 167, 167);
+    max-height: 0%;
 }
 
 #indicator {
@@ -46,4 +55,28 @@ body {
     display: inline-block;
     margin-right: 0.5em;
     border-radius: 50%;
+}
+
+#container {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.5em;
+    color: rgb(156, 156, 156);
+}
+
+footer a {
+    color: rgb(156, 156, 156);
 }
