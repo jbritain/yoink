@@ -1,6 +1,6 @@
 services:
   yoink:
-    build: ./src
+    build: .
     container_name: yoink
     ports:
       - "8080:8080" # port 8080 is used by the app by default, you can change this, though you may as well just change the one Docker exposes

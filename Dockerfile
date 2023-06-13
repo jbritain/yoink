@@ -4,7 +4,6 @@ FROM node:20.3.0
 ENV NODE_ENV=production
 
 WORKDIR /app
-COPY ["package.json", "package-lock.json*", "./"]
+COPY src ./
 RUN npm install --production
-COPY . .
 CMD ["node", "index.js"]
