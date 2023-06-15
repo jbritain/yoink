@@ -24,7 +24,7 @@ function yoink(){
     })
 }
 
-function getStatus(){
+function getStatus(){ // check if target machine is online
     fetch(`${window.location.href}status`, {
         method: 'GET'
     })

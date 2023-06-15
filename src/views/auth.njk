@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>yoink</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/main.css">
+    </head>
+
+    <body>
+        <div id="container">
+            <h1>Enter Password</h1>
+            <form method="post" action="/auth">
+                <input name="password" required type="password" />
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <footer>
+            yoink, made with 💤 by <a href="https://jbritain.net">jbritain</a>
+        </footer>
+
+        <script defer>
+            if (new URL(window.location.href).searchParams.get("invalid")) {
+                window.alert("Incorrect password. Please try again.")
+            }
+        </script>
+
+    </body>
+
+</html>

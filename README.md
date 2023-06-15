@@ -24,6 +24,7 @@ services:
       - MAC=00:11:22:33:44:55 # the target's MAC address
       - IP=192.168.1.123 # the target's IP address
       - PORT=8080 # port to run on
+      - PASSWORD=pleasechangeme # password required to access yoink, leave blank if you do not need authentication
 ```
 
 ### With Node.js
