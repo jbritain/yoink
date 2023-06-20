@@ -1,6 +1,7 @@
 const statusDisplay = document.getElementById("status");
 const button = document.getElementById("yoinkButton");
 const indicator = document.getElementById("indicator");
+const favicon = document.getElementById("favicon");
 let serverStatus = "Waiting for response...";
 let awaitingOnline = false;
 const onlineTimeout = 20000; // time in ms to wait before deciding wol ping didn't work
@@ -16,6 +17,7 @@ function yoink(){
             awaitingOnline = true;
             statusDisplay.innerText = "Waiting for response...";
             indicator.style.backgroundColor = "orange";
+            favicon.href = "/images/favicon_unknown.png"
             wakeFailed = setTimeout(() => {
                 awaitingOnline = false;
                 getStatus();
@@ -40,6 +42,7 @@ function getStatus(){ // check if target machine is online
 
         if (!awaitingOnline){
             statusDisplay.innerText = serverOnline ? "Online" : "Offline";
+            favicon.href = `/images/favicon_${serverOnline ? 'awake' : 'sleep'}.png`
             indicator.style.backgroundColor = serverOnline ? "lawngreen" : "red";
             
         }

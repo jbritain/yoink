@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>yoink</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/main.css">
-    </head>
+{% extends "templates/default.njk" %}
 
-    <body>
-        <div id="container">
-            <h1>🖥️ {{name}}</h1>
-            <h2><div id="indicator"></div><span id="status">unknown</span></h2>
+{% block content %}
+    <div id="container">
+        <h1>🖥️ {{name}}</h1>
+        <h2><div id="indicator"></div><span id="status">unknown</span></h2>
 
-            <button id="yoinkButton" onclick="yoink()">{{message}}</button>
-        </div>
+        <button id="yoinkButton" onclick="yoink()">{{message}}</button>
+    </div>
 
-        <footer>
-            yoink, made with 💤 by <a href="https://jbritain.net">jbritain</a>
-        </footer>
+    <footer>
+        <a href="https://github.com/jbritain/yoink">yoink</a>, made with 💤 by <a href="https://jbritain.net">jbritain</a>
+    </footer>
 
-        <script src="/main.js"></script>
-    </body>
-
-</html>
+    <script src="/main.js"></script>
+{% endblock %}
