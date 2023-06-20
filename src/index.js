@@ -6,6 +6,7 @@ const ping = require('ping');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const messages = require("./messages.json"); // list of messages to put on the button
 
@@ -13,12 +14,30 @@ function select(arr){ // select random node from array
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function generateToken(key){ // hash password into a token
-    return crypto.Hash("sha256").update(key).digest("hex");
+function generateToken(){ // hash password into a token
+    return jwt.sign(
+        {
+            password: PASSWORD
+        },
+        TOKEN_KEY,
+        {
+            "expiresIn": "24h"
+        }
+        
+    );
 }
 
-function checkAuth(token){ // compares hash of token to hash of password from env. If password is blank, authentication is automatically true
-    return (token === generateToken(PASSWORD)) || (PASSWORD === ""); 
+function checkAuth(token){ // checks validity of token
+    if (typeof token !== "string" || token === "") return false;
+    
+    try {
+        let decoded = jwt.verify(token, TOKEN_KEY)
+        if (!decoded) return false;
+        return decoded.password === PASSWORD;
+    } catch(e) {
+        return false;
+    }
+    
 }
 
 require('dotenv').config();
@@ -27,6 +46,7 @@ const MAC = process.env.MAC;
 const IP = process.env.IP;
 const NAME = process.env.NAME;
 const PASSWORD = process.env.PASSWORD || "";
+const TOKEN_KEY = process.env.TOKEN_KEY || crypto.randomBytes(64).toString('hex');
 
 assert(MAC);
 assert(IP);
@@ -41,7 +61,7 @@ var env = nunjucks.configure("views", {
     express: app
 });
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     const message = select(messages.messages); // randomly pick a message to show on the button
     try {
         const token = req.cookies.token || "";
@@ -69,7 +89,7 @@ app.get("/auth", (req, res) => {
 app.post("/auth", (req, res) => {
     try {
         const password = req.body.password;
-        if (checkAuth(generateToken(password))){ // check if correct password
+        if (password === PASSWORD){ // check if correct password
             res.cookie("token", generateToken(password));
             res.redirect("/");
         } else {

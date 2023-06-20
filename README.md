@@ -25,6 +25,7 @@ services:
       - IP=192.168.1.123 # the target's IP address
       - PORT=8080 # port to run on
       - PASSWORD=pleasechangeme # password required to access yoink, leave blank if you do not need authentication
+    # - TOKEN_KEY=7%ocK!w"GS1au4EKg;o9 # ONLY SET THIS IF YOU DO NOT WANT RESTARTING YOINK TO INVALIDATE SESSION TOKENS. I RECOMMEND YOU LEAVE IT BLANK
 ```
 
 ### With Node.js
