@@ -6,7 +6,7 @@ A web UI for sending Wake-On-LAN (WOL) packets. An example use case for this wou
 ![version](https://img.shields.io/docker/v/jbritain/yoink)
 
 ## Screenshots
-![A screenshot of yoink](/screenshots/alpha0.1.0.png)
+![A screenshot of yoink](/screenshots/release1.5.png)
 
 ## Installation/Usage
 ### With Docker
