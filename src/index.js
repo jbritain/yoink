@@ -28,6 +28,7 @@ function generateToken(){ // hash password into a token
 }
 
 function checkAuth(token){ // checks validity of token
+    if (PASSWORD == "") return true;
     if (typeof token !== "string" || token === "") return false;
     
     try {
@@ -47,6 +48,8 @@ const IP = process.env.IP;
 const NAME = process.env.NAME;
 const PASSWORD = process.env.PASSWORD || "";
 const TOKEN_KEY = process.env.TOKEN_KEY || crypto.randomBytes(64).toString('hex');
+const STATUS_INTERVAL = process.env.status_INTERVAL || 1000;
+const ONLINE_TIMEOUT = process.env.ONLINE_TIMEOUT || 20000
 
 assert(MAC);
 assert(IP);
@@ -70,7 +73,9 @@ app.get("/", async (req, res) => {
         } else {
             res.render("index.njk", {
                 name: NAME,
-                message: message
+                message: message,
+                statusInterval: STATUS_INTERVAL,
+                onlineTimeout: ONLINE_TIMEOUT
             })
         }        
     } catch(e) {

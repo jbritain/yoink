@@ -10,3 +10,5 @@ services:
       - IP=192.168.1.123 # the target's IP address
       - PORT=8080 # port to run on
       - PASSWORD=pleasechangeme # password, leave blank for no authentication
+      - STATUS_INTERVAL=5000 # how often the frontend pings to request server status, in ms
+      - ONLINE_TIMOUT=30000 # how long before it is decided the server did not respond to the WOL ping. Has no actual effect, only means the status returns to 'offline' sooner

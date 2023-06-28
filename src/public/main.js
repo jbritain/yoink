@@ -4,9 +4,12 @@ const indicator = document.getElementById("indicator");
 const favicon = document.getElementById("favicon");
 let serverStatus = "Waiting for response...";
 let awaitingOnline = false;
-const onlineTimeout = 20000; // time in ms to wait before deciding wol ping didn't work
 
 var wakeFailed;
+
+function redirectAuth(){
+    window.location.href = "/auth";
+}
 
 function yoink(){
     fetch(`${window.location.href}yoink`, {
@@ -22,6 +25,8 @@ function yoink(){
                 awaitingOnline = false;
                 getStatus();
             }, onlineTimeout)
+        } else if (res.status === 401){
+            redirectAuth()
         }
     })
 }
@@ -30,7 +35,12 @@ function getStatus(){ // check if target machine is online
     fetch(`${window.location.href}status`, {
         method: 'GET'
     })
-    .then(res => res.text())
+    .then(res => {
+        if (res.status == 401) {
+            redirectAuth();
+        }
+        res.text()
+    })
     .then(online => {
 
         if (awaitingOnline && serverOnline){
@@ -49,8 +59,8 @@ function getStatus(){ // check if target machine is online
 
 
         button.disabled = (serverOnline || awaitingOnline);
+        setTimeout(getStatus, statusInterval); // run function again after delay
     });
 }
 
 getStatus();
-setInterval(getStatus, 1000);
