@@ -27,7 +27,7 @@ services:
       - PASSWORD=pleasechangeme # password required to access yoink, leave blank if you do not need authentication
       - STATUS_INTERVAL=5000 # how often the frontend pings to request server status, in ms
       - ONLINE_TIMOUT=30000 # how long before it is decided the server did not respond to the WOL ping. Has no actual effect, only means the status returns to 'offline' sooner
-    # - TOKEN_KEY=7%ocK!w"GS1au4EKg;o9 # ONLY SET THIS IF YOU DO NOT WANT RESTARTING YOINK TO INVALIDATE SESSION TOKENS. I RECOMMEND YOU DO NOT SET THIS VALUE. IF YOU DO SET IT, DO NOT SHARE IT WITH ANYONE AS IT CAN BE USED TO REVERSE ENGINEER THE PASSWORD
+    # - TOKEN_KEY=[YOUR_SECURE_STRING] # ONLY SET THIS IF YOU DO NOT WANT RESTARTING YOINK TO INVALIDATE SESSION TOKENS. I RECOMMEND YOU DO NOT SET THIS VALUE. IF YOU DO SET IT, DO NOT SHARE IT WITH ANYONE AS IT CAN BE USED TO REVERSE ENGINEER THE PASSWORD
 ```
 
 ### With Node.js
