@@ -17,7 +17,7 @@ services:
   yoink:
     image: jbritain/yoink:latest
     container_name: yoink
-    network-mode: host
+    network_mode: host
     restart: unless-stopped
     environment:
       - NAME=YOUR_SERVER_NAME # appears at the top of the webpage
